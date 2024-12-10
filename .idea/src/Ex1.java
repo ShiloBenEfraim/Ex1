@@ -20,7 +20,7 @@ public class Ex1 {
          */
         public static int number2Int(String num) {
             int ans = -1;
-            // add your code here buddy!
+            // add your code here
 
             ////////////////////
             return ans;
