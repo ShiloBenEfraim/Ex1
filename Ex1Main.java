@@ -1,4 +1,3 @@
-package assignments.ex1;
 import java.util.Scanner;
 
 /**
@@ -8,7 +7,8 @@ import java.util.Scanner;
  */
 public class Ex1Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        System.out.println(Ex1.isNumber("1011b1"));
+/*       Scanner sc = new Scanner(System.in);
         String num1 = "", num2="", quit = "quit";
         while (!num1.equals(quit) && !num2.equals(quit)) {
             System.out.println();
@@ -16,11 +16,16 @@ public class Ex1Main {
             System.out.println("Enter a string as number#1 (or \"quit\" to end the program): ");
             num1 = sc.next();
             if (!num1.equals("quit")) {
-                // add your code here
 
+                // add your code here
                 /////////////////////
             }
+
         }
+
         System.out.println("quiting now...");
+   */
     }
+
 }
+

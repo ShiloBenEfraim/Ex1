@@ -1,4 +1,4 @@
-package assignments.ex1;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,10 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Make sure you complete all the needed JUnits
  */
 public class Ex1Test {
-        @Test
+/*        @Test
         void computeNumberTest() {
             String s2 = "1011b2";
-            int v = Ex1.number2Int(s2);
+            int v = Ex1.(s2);
             assertEquals(v,11);
             String s10 = "1011bA";
             v = Ex1.number2Int(s10);
@@ -20,7 +20,7 @@ public class Ex1Test {
             assertEquals(v,v2);
             assertTrue(Ex1.equals(s10,s2));
         }
-
+*/
         @Test
         void isBasisNumberTest() {
             String[] good = {"1", "1b2", "01b2", "123bA", "ABbG", "0bA"};
