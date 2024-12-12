@@ -18,6 +18,7 @@ public class Ex1Main {
             System.out.println("Enter a string as number#1 (or \"quit\" to end the program): ");
             num1 = sc.next();
 
+            
 
             if (!num1.equals(quit)) {
                 // Validate num1
