@@ -21,61 +21,30 @@ public class Ex1 {
      */
 
     public static int number2Int(String num) {
-        if (num == null || num.length() == 0) {
-            return -1;
-        }
-
-        // Check for negative numbers or decimals
-        if (num.contains("-") || num.contains(".")) {
+        if (!isNumber(num)) {
             return -1;
         }
 
         int bPosition = num.indexOf('b');
-        if (bPosition == -1) {  // no 'b', treat as base 10
-            for (char c : num.toCharArray()) {
-                if (!(c >= '0' && c <= '9')) {  // only digits 0-9 are allowed
-                    return -1;
-                }
-            }
-            // Convert the string to an integer (base 10)
-            return Integer.parseInt(num);
-        }
-
-        // If 'b' is found, split the number and base
         String numberPart = num.substring(0, bPosition);
         String basePart = num.substring(bPosition + 1);
 
-        // Ensure the base part is a valid base between 2 and 16
-        int base = -1;
-        try {
-            base = Integer.parseInt(basePart);
-        } catch (NumberFormatException e) {
-            return -1;
-        }
+        // חשב את הבסיס
+        int base = Character.isDigit(basePart.charAt(0))
+                ? basePart.charAt(0) - '0'
+                : basePart.charAt(0) - 'A' + 10;
 
-        if (base < 2 || base > 16) {
-            return -1;
-        }
-
-        // Check if the number part contains valid characters for the given base
-        for (char c : numberPart.toCharArray()) {
-            if (!(Character.isDigit(c) || (c >= 'A' && c <= 'G'))) {  // A-G for bases greater than 10
-                return -1;
-            }
-            int value = Character.digit(c, base);
-            if (value == -1) {  // invalid character for the base
-                return -1;
-            }
-        }
-
-        // Convert numberPart to an integer based on the base
         int result = 0;
         for (char c : numberPart.toCharArray()) {
-            result = result * base + Character.digit(c, base);
+            int digit = Character.isDigit(c) ? c - '0' : c - 'A' + 10;
+
+            // עדכון התוצאה תוך המרת המספר לבסיס עשרוני
+            result = result * base + digit;
         }
 
         return result;
     }
+
 
     /**
      * This static function checks if the given String (g) is in a valid "number" format.
@@ -84,7 +53,7 @@ public class Ex1 {
      * @return true iff the given String is in a number format
      */
 
-    
+
     public static boolean isNumber(String a) {
         if (a == null || a.length() == 0) {
             return false;
