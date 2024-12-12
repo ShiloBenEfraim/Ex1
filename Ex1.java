@@ -21,29 +21,41 @@ public class Ex1 {
      */
 
     public static int number2Int(String num) {
-        if (!isNumber(num)) {
-            return -1;
+        int ans = -1;
+        if (num == null || num.isEmpty()) {
+            return ans; // Return -1 if the string is null or empty
         }
 
-        int bPosition = num.indexOf('b');
-        String numberPart = num.substring(0, bPosition);
-        String basePart = num.substring(bPosition + 1);
+        // Case 1: If there is no 'b' in the input, treat it as a decimal (base 10) number
+        if (!num.contains("b")) {
+            try {
+                ans = Integer.parseInt(num);  // Try to parse it as a decimal number
+            } catch (NumberFormatException e) {
+                ans = -1;  // If parsing fails, it's an invalid number
+            }
+        } else {
+            // Case 2: Handle numbers with a base specified (e.g., 123b4)
+            String[] parts = num.split("b");
+            if (parts.length == 2) {
+                try {
+                    String numberPart = parts[0];  // The number part before the 'b'
+                    String basePart = parts[1];    // The base part after the 'b'
 
-        // חשב את הבסיס
-        int base = Character.isDigit(basePart.charAt(0))
-                ? basePart.charAt(0) - '0'
-                : basePart.charAt(0) - 'A' + 10;
-
-        int result = 0;
-        for (char c : numberPart.toCharArray()) {
-            int digit = Character.isDigit(c) ? c - '0' : c - 'A' + 10;
-
-            // עדכון התוצאה תוך המרת המספר לבסיס עשרוני
-            result = result * base + digit;
+                    // Convert the base part to an integer (should be between 2 and 16)
+                    int base = Integer.parseInt(basePart);
+                    if (base >= 2 && base <= 16) {
+                        ans = Integer.parseInt(numberPart, base); // Convert the number using the given base
+                    } else {
+                        ans = -1;  // If base is not in range [2,16], return -1
+                    }
+                } catch (Exception e) {
+                    ans = -1;  // In case of any exception (e.g., invalid base or number), return -1
+                }
+            }
         }
-
-        return result;
+        return ans;  // Return the result (either valid number or -1 for invalid input)
     }
+
 
 
     /**

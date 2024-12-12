@@ -19,7 +19,6 @@ public class Ex1Main {
             System.out.println("Enter a string as number#1 (or \"quit\" to end the program): ");
             num1 = sc.next();
 
-
             if (!num1.equals(quit)) {
                 // Validate num1
                 if (Ex1.isNumber(num1)) {
@@ -28,7 +27,6 @@ public class Ex1Main {
                     System.out.println("num1 = " + num1 + " is number: true , value: " + decimal1);
                 } else {
                     System.out.println("num1 = " + num1 + " is number: false , value: -1");
-
                 }
             }
 
@@ -37,24 +35,46 @@ public class Ex1Main {
                 System.out.println("Enter a string as number#2 (or \"quit\" to end the program): ");
                 num2 = sc.next();
 
-                if (!num1.equals(quit)) {
-                    // Validate num1
-                    if (Ex1.isNumber(num1)) {
-                        // Convert num1 to decimal
-                        int decimal1 = Ex1.number2Int(num1);
-                        System.out.println("num1 = " + num1 + " is number: true , value: " + decimal1);
+                if (!num2.equals(quit)) {
+                    // Validate num2
+                    if (Ex1.isNumber(num2)) {
+                        // Convert num2 to decimal
+                        int decimal2 = Ex1.number2Int(num2);
+                        System.out.println("num2 = " + num2 + " is number: true , value: " + decimal2);
                     } else {
-                        System.out.println("num1 = " + num1 + " is number: false , value: -1");
-
+                        System.out.println("num2 = " + num2 + " is number: false , value: -1");
                     }
                 }
 
+                // Ask the user for a base
+                System.out.println("Enter a base for output (a number between 2 and 16): ");
+                int base = sc.nextInt();
 
-                // Compare num1 and num2
-                if (Ex1.equals(num1, num2)) {
-                    System.out.println("Both numbers are equal.");
+                if (base < 2 || base > 16) {
+                    System.out.println("Invalid base. Please enter a number between 2 and 16.");
                 } else {
-                    System.out.println("Numbers are not equal.");
+                    // Convert both num1 and num2 to the new base and perform operations
+                    int decimal1 = Ex1.number2Int(num1);
+                    int decimal2 = Ex1.number2Int(num2);
+
+                    // Perform addition and multiplication
+                    int sum = decimal1 + decimal2;
+                    int product = decimal1 * decimal2;
+
+                    // Convert the results to the desired base
+                    String sumBase = Ex1.int2Number(sum, base);
+                    String productBase = Ex1.int2Number(product, base);
+
+                    // Print the results
+                    System.out.println(num1 + " + " + num2 + " = " + sumBase);
+                    System.out.println(num1 + " * " + num2 + " = " + productBase);
+
+                    // Find the maximum number from the list of numbers and convert to the new base
+                    String[] numbers = { num1, num2, sumBase, productBase };
+                    int maxIndex = Ex1.maxIndex(numbers);
+                    String maxNumber = numbers[maxIndex];
+
+                    System.out.println("Max number over " + String.join(",", numbers) + " is: " + maxNumber);
                 }
             } else {
                 System.out.println("Invalid input for number #2.");
