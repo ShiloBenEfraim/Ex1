@@ -2,6 +2,7 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import assignments.ex1.Ex1;
 
 /**
  * This JUnit class represents a very partial test class for Ex1.
