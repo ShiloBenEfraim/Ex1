@@ -63,28 +63,43 @@ public class Ex1_BackUp {
      */
 
     public static boolean isNumber(String a) {
-        boolean ans = true;
-        if (a == null || a.equals("")) {
-            ans = false; // If string is empty or null, it's invalid
-        }
-        // Check if 'b' exists in middle and if parts are correct
-        int bIndex = a.indexOf('b');
-        if (bIndex == -1 || bIndex == 0 || bIndex == a.length() - 1) {
-            ans = false;
-        }
-        String numberPart = a.substring(0, bIndex);
-        String basePart = a.substring(bIndex + 1);
-        try {
-            int base = getBase(basePart); // Get base as number
-            if (base < 2 || base > 16) {
-                ans = false;
-            }
-            Integer.parseInt(numberPart, base); // Check if number matches base
-        } catch (Exception e) {
-            ans = false; // Any error means number is invalid
+        if (a == null || a.length() == 0) {
+            return false;
         }
 
-        return ans;
+        int bPosition = a.indexOf('b');
+        if (bPosition == -1) {
+            for (char c : a.toCharArray()) {
+                if (!(c >= '0' && c <= '9')) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        String numberPart = a.substring(0, bPosition);
+        String basePart = a.substring(bPosition + 1);
+
+        // check that base is valid
+        if (basePart.length() != 1 || numberPart.length() == 0)
+            return false;
+
+        char baseChar = basePart.charAt(0);
+        boolean isBaseBetween2and9 = '2' <= baseChar && baseChar <= '9';
+        boolean isBaseBetweenAandG = 'A' <= baseChar && baseChar <= 'G';
+        if (!(isBaseBetween2and9 || isBaseBetweenAandG))
+            return false;
+
+        // check that number is valid
+        for (char c : numberPart.toCharArray()) {
+            boolean isBaseBiggerThanNum = baseChar > c;
+            boolean isValidLetter = '0' <= c && c <= '9' || 'A' <= c && c <= 'G';
+
+            if (!(isValidLetter && isBaseBiggerThanNum))
+                return false;
+        }
+
+        return true;
     }
 
     /**

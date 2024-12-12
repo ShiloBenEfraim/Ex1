@@ -1,4 +1,5 @@
 package assignments.ex1;
+
 /**
  * This class represents a simple solution for Ex1.
  * As defined here: <a href="https://docs.google.com/document/d/1AJ9wtnL1qdEs4DAKqBlO1bXCM6r6GJ_J/r/edit/edit">...</a>
@@ -88,42 +89,36 @@ public class Ex1 {
             return false;
         }
 
-        // Check for invalid characters or 'b'
         int bPosition = a.indexOf('b');
-        if (bPosition == -1) {  // no 'b', assume base 10
+        if (bPosition == -1) {
             for (char c : a.toCharArray()) {
-                if (!(c >= '0' && c <= '9')) {  // only digits 0-9 are allowed
+                if (!(c >= '0' && c <= '9')) {
                     return false;
                 }
             }
-            return true;  // valid base 10 number
+            return true;
         }
 
-        // If 'b' is present, check the base and number part
         String numberPart = a.substring(0, bPosition);
         String basePart = a.substring(bPosition + 1);
 
-        // Ensure the base part is a valid integer
-        int base;
-        try {
-            base = Integer.parseInt(basePart);
-        } catch (NumberFormatException e) {
+        // check that base is valid
+        if (basePart.length() != 1 || numberPart.length() == 0)
             return false;
-        }
 
-        if (base < 2 || base > 16) {
+        char baseChar = basePart.charAt(0);
+        boolean isBaseBetween2and9 = '2' <= baseChar && baseChar <= '9';
+        boolean isBaseBetweenAandG = 'A' <= baseChar && baseChar <= 'G';
+        if (!(isBaseBetween2and9 || isBaseBetweenAandG))
             return false;
-        }
 
-        // Check for valid characters based on the base
+        // check that number is valid
         for (char c : numberPart.toCharArray()) {
-            if (!(Character.isDigit(c) || (c >= 'A' && c <= 'G'))) {  // A-G for bases > 10
+            boolean isBaseBiggerThanNum = baseChar > c;
+            boolean isValidLetter = '0' <= c && c <= '9' || 'A' <= c && c <= 'G';
+
+            if (!(isValidLetter && isBaseBiggerThanNum))
                 return false;
-            }
-            int value = Character.digit(c, base);
-            if (value == -1) {
-                return false;
-            }
         }
 
         return true;
