@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import assignments.ex1.Ex1;
 
+
 public class Ex1Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
