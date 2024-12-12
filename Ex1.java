@@ -84,6 +84,7 @@ public class Ex1 {
      * @return true iff the given String is in a number format
      */
 
+    
     public static boolean isNumber(String a) {
         if (a == null || a.length() == 0) {
             return false;
